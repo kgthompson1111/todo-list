@@ -26,7 +26,6 @@ function idMaker(string) {
     let newTitle = string + "id";
     let titleFixer = newTitle.replace(/ /g, "");
     newTitle = titleFixer.toLowerCase();
-    console.log(newTitle);
     return newTitle;
 }
 
@@ -44,6 +43,7 @@ function activeProject(e) {
 
 function deleteProject(e) {
     // returns the ID as a string
+    console.log(e.target.parentNode.id);
     const targetId = e.target.parentNode.id;
     console.log(targetId);
     // returns the DOM object of the current ID
@@ -61,6 +61,8 @@ function deleteProject(e) {
     // delete dom element
     e.target.parentNode.parentNode.removeChild(targetItem);
 
+    e.stopPropagation();
+
     renderProjects();
 
 }
@@ -76,8 +78,8 @@ function renderProjects() {
         projectItem.classList.add('projectItem');
         projectItem.classList.add('clickable');
 
+        // make an id for each project in the array
         projectItem.id = idMaker(`${projectList[i].title}`);
-        console.log(projectItem.id);
 
         projects.appendChild(projectItem);
 
