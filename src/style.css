@@ -1,0 +1,134 @@
+:root {
+    --light1: #EFBCD5FE;
+    --light2: #BE97C6;
+    --med1: #8661C1;
+    --med2: #4B5267;
+    --dark1: #2E294E;
+}
+
+* {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+
+h1 {
+    font-size: 48px;
+    color: var(--light1);
+}
+
+h2 {
+    font-size: 36px;
+    color: var(--light1);
+}
+
+h1, h2 {
+    margin-top: 10px;
+}
+
+#content-holder {
+    width: 75%;
+    display: flex;
+
+    border: solid 3px var(--dark1);
+}
+
+#header-bar {
+    width: 75%;
+    height: 110px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    background-color: var(--dark1);
+
+    margin-bottom: 20px;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--light1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 0px;
+}
+
+#projects {
+    width: 30%;
+    height: 100vh;
+    background-color: var(--med1);
+    padding: 0px 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projectItem {
+    width: 80%;
+    height: 60px;
+
+    background-color: var(--light2);
+
+    border: solid 3px var(--dark1);
+
+    font-size: 24px;
+    color: var(--dark1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#projectInput {
+    width: 75%;
+    font-size: 24px;
+    color: var(--dark1);
+    background-color: var(--light2);
+}
+
+.activeProject {
+    box-shadow: 0px 0px 3px 3px rgba(255, 255, 255, 0.644);
+}
+
+#todos {
+    width: 70%;
+    height: 100vh;
+    background-color: var(--med2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addProjectButton, .deleteProjectButton {
+    height: 100%;
+    width: 10%;
+    font-size: 24px;
+
+    margin-left: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: sans-serif;
+
+    border: solid 1px var(--dark1);
+    background-color: var(--med2);
+    color: var(--light2);
+
+    cursor: pointer;
+}
