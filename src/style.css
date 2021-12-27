@@ -92,7 +92,7 @@ h1, h2 {
     cursor: pointer;
 }
 
-#projectInput {
+#projectInputField {
     width: 75%;
     font-size: 24px;
     color: var(--dark1);
