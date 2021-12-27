@@ -20,10 +20,14 @@ projectList[0] = new project('Example1');
 projectList[1] = new project('Example2');
 projectList[2] = new project('Example3');
 
-// list projects
+// makes a javascript valid id based on project title
 
-function projectForm() {
-    
+function idMaker(string) {
+    let newTitle = string + "id";
+    let titleFixer = newTitle.replace(/ /g, "");
+    newTitle = titleFixer.toLowerCase();
+    console.log(newTitle);
+    return newTitle;
 }
 
 function activeProject(e) {
@@ -72,7 +76,8 @@ function renderProjects() {
         projectItem.classList.add('projectItem');
         projectItem.classList.add('clickable');
 
-        projectItem.id = projectList[i].title;
+        projectItem.id = idMaker(`${projectList[i].title}`);
+        console.log(projectItem.id);
 
         projects.appendChild(projectItem);
 
