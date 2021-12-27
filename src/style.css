@@ -126,9 +126,13 @@ h1, h2 {
 
     font-family: sans-serif;
 
-    border: solid 1px var(--dark1);
+    border: solid 3px var(--dark1);
     background-color: var(--med2);
     color: var(--light2);
 
     cursor: pointer;
+}
+
+#addProjectButton:active, .deleteProjectButton:active {
+    background-color: var(--dark1);
 }

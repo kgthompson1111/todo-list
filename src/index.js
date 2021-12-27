@@ -34,6 +34,8 @@ function activeProject(e) {
     currentProject = e.target.id;
     const thisProject = document.getElementById(currentProject);
     thisProject.classList.add('activeProject');
+
+    activeHeader.innerText = `${currentProject} To-do:`;
 }
 
 function deleteProject(e) {
