@@ -44,6 +44,8 @@ h1, h2 {
     background-color: var(--dark1);
 
     margin-bottom: 20px;
+
+    border: solid 3px var(--dark1);
 }
 
 #container {

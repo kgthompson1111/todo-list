@@ -17,18 +17,27 @@ function idMaker(string) {
     return newTitle;
 }
 
-// handle active projects
-function activeProject(e) {
-    // remove previous highlighted current project
+function checkCurrentProject() {
     if(currentProject) {
         const thisProject = document.getElementById(currentProject);
         thisProject.classList.remove('activeProject');
     }
-    currentProject = e.target.id;
-    const thisProject = document.getElementById(currentProject);
-    thisProject.classList.add('activeProject');
+}
 
-    activeHeader.innerText = `${thisProject.firstChild.data} To-do:`;
+function setCurrentProject(current) {
+    currentProject = current;
+    console.log(typeof(currentProject));
+    const thisProject = document.getElementById(currentProject);
+    console.log(thisProject);
+    thisProject.classList.add('activeProject');
+    activeHeader.innerText = `${thisProject.firstChild.data} to-do:`;
+}
+
+// handle active projects
+function activeProject(e) {
+    // remove previous highlighted current project
+    checkCurrentProject();
+    setCurrentProject(e.target.id);
 }
 
 function checkDuplicate(input) {
@@ -69,6 +78,10 @@ function addProject() {
         projectList.push(newProject);
 
         renderProjects();
+
+        checkCurrentProject();
+
+        setCurrentProject(newProject.id);
     }
 
 }
@@ -121,6 +134,8 @@ function projectsDivMaker() {
         projectItem.innerText = projectList[i].title;
         projectItem.classList.add('projectItem');
         projectItem.classList.add('clickable');
+
+        projectItem.id = idMaker(projectList[i].title);
 
         projects.appendChild(projectItem);
 
