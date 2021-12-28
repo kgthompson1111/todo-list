@@ -70,6 +70,7 @@ function todoFactory() {
         const submitTodoForm = document.createElement('button');
         submitTodoForm.id = 'submitTodoForm';
         submitTodoForm.innerText = "Submit";
+        submitTodoForm.addEventListener('click', addTodoItem);
         newTodoCard.appendChild(submitTodoForm);
     }
 
@@ -120,7 +121,6 @@ function todoFactory() {
 
     function idMaker(string) {
         let randomNumber = (Math.floor(Math.random()*3000));
-        console.log(randomNumber);
         let newId = string + "todoid" + randomNumber;
         let idFixer = newId.replace(/ /g, "");
         newId = idFixer.toLowerCase();
@@ -133,13 +133,43 @@ function todoFactory() {
 
     function addTodoItem() {
         // create a new todo in current project
+        const index = projectList.findIndex(i => i.id == `${currentProject}`);
+
+        // check for required fields
+        if(`${titleInput.value}` == "") {
+            alert("Task is a required field");
+            return;
+        } else if(`${dueDateInput.value}` == "") {
+            alert("Due date is a required field");
+            return;
+        }
+        
+
+        console.log(dueDateInput.value);
+
+        // add new todo item with content in the form
+        const newTodoItem = new todoItem(
+        //title
+        `${titleInput.value}`,
+        //description
+        `${descriptionInput.value}`,
+        //due date
+        `${dueDateInput.value}`,
+        //high priority
+        highPriorityInput.checked ? true : false
+        );
+        
+        // check for high priority and add high priority calss
+        
+        projectList[index].todoManager.todoList.push(newTodoItem);
+        projectList[index].todoManager.renderTodos();
 
     }
 
     function renderTodos() {    
     // do not render todos if there is no current project
     if(!currentProject == null) {
-        console.log("no current project");
+        return;
     }
     const thisProjectElement = document.getElementById(currentProject);
     todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;

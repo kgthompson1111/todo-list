@@ -94,7 +94,7 @@ h1, h2 {
 
 .todoItem {
     width: 90%;
-    min-height: 60px;
+    min-height: fit-content;
 
     background-color: var(--light2);
 
