@@ -1,14 +1,8 @@
 import { todoFactory } from './todoManager.js';
+import { currentProject, projectList } from './globals.js';
 
 function projectFactory() {
 
-// console.log(projectList[0].todos);
-
-// project manager code
-
-// project related variables
-const projectList = [];
-let currentProject;
 
 function project(title, todoManager) {
     this.title = title;
@@ -32,9 +26,7 @@ function checkCurrentProject() {
 
 function setCurrentProject(current) {
     currentProject = current;
-    console.log(currentProject);
     const thisProjectElement = document.getElementById(currentProject);
-    console.log(thisProjectElement);
     thisProjectElement.classList.add('activeProject');
     activeHeader.innerText = `${thisProjectElement.firstChild.data} to-do:`;
 }
@@ -44,6 +36,10 @@ function activeProject(e) {
     // remove previous highlighted current project
     checkCurrentProject();
     setCurrentProject(e.target.id);
+
+    // render todos based on project index
+    const index = projectList.findIndex(i => i.id == `${currentProject}`);
+    projectList[index].todoManager.renderTodos();
 }
 
 function checkDuplicate(input) {
@@ -57,7 +53,6 @@ function checkDuplicate(input) {
         if(projectList[i].id == duplicateChecker) {
             alert("project must not be duplicate");
             projectInputField.value = "";
-            console.log("duplicate detected");
             return true;
         }
     }
@@ -88,6 +83,9 @@ function addProject() {
         checkCurrentProject();
 
         setCurrentProject(newProject.id);
+
+        const index = projectList.findIndex(i => i.id == `${currentProject}`);
+        projectList[index].todoManager.renderTodos();
     }
 
 }
@@ -115,9 +113,10 @@ function appendProjectButton() {
 function deleteProject(e) {
     // returns the ID as a string
     const targetId = e.target.parentNode.id;
+    // returns the index that matches the string ID
+    const index = projectList.findIndex(i => i.title == `${targetId}`);
     // returns the DOM object of the current ID
     const targetItem = document.getElementById(targetId);
-    const index = projectList.findIndex(i => i.title == `${targetId}`);
     
     if(currentProject == targetId) {
         return;
@@ -169,7 +168,6 @@ function renderProjects() {
     projectsDivMaker();
 
     appendProjectButton();
-
 }
 
 return { project, projectList, currentProject, idMaker, activeProject, deleteProject, renderProjects, setCurrentProject, idMaker };

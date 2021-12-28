@@ -1,4 +1,5 @@
-import { projectFactory } from './projectManager.js';
+import { currentProject } from './globals.js';
+import { projectList } from './globals.js';
 
 function todoFactory() {
 
@@ -12,9 +13,14 @@ function todoFactory() {
         isDone = false;
     }
 
-    function renderTodos() {
+    function renderTodos() {    
+    const thisProjectElement = document.getElementById(currentProject);
+    todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;
+    //find the index of the current project and render the todos under that index
+    const index = projectList.findIndex(i => i.id == `${currentProject}`);
+    // console.log(index);
 
-        for(var i = 0; i<todoList.length; i++) {
+        for(var i = 0; i<projectList[index].todoManager.todoList.length; i++) {
             const todoItem = document.createElement('div');
             todoItem.classList.add('todoItem');
 
