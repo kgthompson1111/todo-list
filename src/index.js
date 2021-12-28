@@ -9,13 +9,13 @@ const projectManager = new projectFactory();
 const todoManager = new todoFactory();
 
 // populate project list and set current project
-projectManager.projectList[0] = new projectManager.project('Today');
+projectManager.projectList[0] = new projectManager.project('Life');
 projectManager.projectList[0].id = projectManager.idMaker(projectManager.projectList[0].title)
 
 // test to-do item
-projectManager.projectList[0].todoManager.todoList[0] = new todoManager.todoItem('Project 1', 'Description', 'dueDate', false, false);
-projectManager.projectList[0].todoManager.todoList[1] = new todoManager.todoItem('Project 2', 'Description', 'dueDate', true, false);
-projectManager.projectList[0].todoManager.todoList[2] = new todoManager.todoItem('Project 3', 'Description', 'dueDate', true, false);
+projectManager.projectList[0].todoManager.todoList[0] = new todoManager.todoItem('Feed cats', 'Feed the kitties!', '', false);
+projectManager.projectList[0].todoManager.todoList[1] = new todoManager.todoItem('Study for exam', 'Study for upcoming exam', '2022-01-16', true);
+projectManager.projectList[0].todoManager.todoList[2] = new todoManager.todoItem('Take out garbage', '', '', false);
 
 projectManager.renderProjects();
 

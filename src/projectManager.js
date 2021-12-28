@@ -156,8 +156,6 @@ function deleteProject(e) {
     if(targetId == currentProject) {
         currentProject = null;
     }
-
-
 }
 
 function projectsDivMaker() {

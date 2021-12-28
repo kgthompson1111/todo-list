@@ -139,9 +139,6 @@ function todoFactory() {
         if(`${titleInput.value}` == "") {
             alert("Task is a required field");
             return;
-        } else if(`${dueDateInput.value}` == "") {
-            alert("Due date is a required field");
-            return;
         }
         
 
@@ -166,6 +163,31 @@ function todoFactory() {
 
     }
 
+    function deleteTodoItem(e) {
+        // double check to delete entire project
+        if(window.confirm("Are you sure you want to delete this item?")) {
+            null;
+        } else {
+            return;
+        }
+    
+        // returns the ID as a string
+        const targetId = e.target.parentNode.id;
+    
+        // returns the index that matches the string ID
+        const index = todoList.findIndex(i => i.id == `${targetId}`);
+
+        // // returns the DOM object of the current ID
+        const targetItem = document.getElementById(targetId);
+    
+        // // delete from todo array
+        todoList.splice(index, 1);
+    
+        // // delete dom element
+        e.target.parentNode.parentNode.removeChild(targetItem);
+        renderTodos();
+    }
+
     function renderTodos() {    
     // do not render todos if there is no current project
     if(!currentProject == null) {
@@ -177,11 +199,13 @@ function todoFactory() {
     const index = projectList.findIndex(i => i.id == `${currentProject}`);
 
         for(var i = 0; i<projectList[index].todoManager.todoList.length; i++) {
+            const newTodoId = idMaker(projectList[index].todoManager.todoList[i].title);
             const todoItem = document.createElement('div');
             todoItem.classList.add('todoItem');
-            todoItem.id = idMaker(projectList[index].todoManager.todoList[i].title)
+            todoItem.id = newTodoId;
+            todoList[i].id = newTodoId;
 
-            //check for high priority item and update class and stying
+            //check for high priority item and update class and styling
             if(projectList[index].todoManager.todoList[i].isHighPriority == true) {
                 todoItem.classList.add('highPriorityItem');
                 const highPriorityText = document.createElement('div');
@@ -197,16 +221,24 @@ function todoFactory() {
             todoItem.appendChild(todoTitle);
 
             // todo dueDate
+            if(todoList[i].dueDate) {
             const todoDueDate = document.createElement('div');
             todoDueDate.classList.add('todoContent', 'todoDueDate');
             todoDueDate.innerText = "due " + todoList[i].dueDate;
             todoItem.appendChild(todoDueDate);
+            }
 
             // todo description
             const todoDescription = document.createElement('div');
             todoDescription.classList.add('todoContent', 'todoDescription');
             todoDescription.innerText = todoList[i].description;
             todoItem.appendChild(todoDescription);
+
+            const deleteTodoButton = document.createElement('div');
+            deleteTodoButton.innerText = "x";
+            deleteTodoButton.classList.add('deleteButton');
+            deleteTodoButton.addEventListener('click', deleteTodoItem);
+            todoItem.appendChild(deleteTodoButton);
 
             todos.appendChild(todoItem);
         }
