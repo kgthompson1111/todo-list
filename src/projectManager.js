@@ -90,19 +90,20 @@ function addProject() {
 
 }
 
-function appendProjectButton() {
+function appendProjectForm() {
     //render the project add field/button
     const newProjectForm = document.createElement('div');
     newProjectForm.classList.add('projectItem');
     newProjectForm.id = "newProjectForm";
-    const addProjectButton = document.createElement('div');
-    addProjectButton.innerText = "\+";
 
     const projectInputField = document.createElement('input');
     projectInputField.id = "projectInputField";
     newProjectForm.appendChild(projectInputField);
 
+    const addProjectButton = document.createElement('div');
+    addProjectButton.innerText = "\+";
     addProjectButton.id = 'addProjectButton';
+    addProjectButton.classList.add('addButton');
     newProjectForm.appendChild(addProjectButton);
     addProjectButton.addEventListener('click', addProject);
 
@@ -111,15 +112,33 @@ function appendProjectButton() {
 
 
 function deleteProject(e) {
+
+    // double check to delete entire project
+    if(window.confirm("Are you sure? Deleting a project will remove all of the tasks.")) {
+        null;
+    } else {
+        e.stopPropagation();
+        return;
+    }
+    console.log("still going");
+
     // returns the ID as a string
     const targetId = e.target.parentNode.id;
+
     // returns the index that matches the string ID
-    const index = projectList.findIndex(i => i.title == `${targetId}`);
+    const index = projectList.findIndex(i => i.id == `${targetId}`);
+
     // returns the DOM object of the current ID
     const targetItem = document.getElementById(targetId);
-    
-    if(currentProject == targetId) {
-        return;
+
+    // delete all sub-projects
+    projectList[index].todoManager.todoList.splice(0, projectList[index].todoManager.todoList.length);
+
+    // if viewing current project, delete all dom elements
+    if(currentProject == projectList[index].id) {
+        const thisProjectElement = document.getElementById(currentProject);
+        todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;
+        projectList[index].todoManager.appendTodoForm();
     }
 
     // delete from projects array
@@ -129,6 +148,9 @@ function deleteProject(e) {
     e.target.parentNode.parentNode.removeChild(targetItem);
     e.stopPropagation();
     renderProjects();
+
+    setCurrentProject(currentProject);
+
 }
 
 function projectsDivMaker() {
@@ -147,8 +169,8 @@ function projectsDivMaker() {
         projectItem.addEventListener('click', activeProject);
 
         const deleteProjectButton = document.createElement('div');
-        deleteProjectButton.innerText = "X";
-        deleteProjectButton.classList.add('deleteProjectButton');
+        deleteProjectButton.innerText = "x";
+        deleteProjectButton.classList.add('deleteButton');
         projectItem.appendChild(deleteProjectButton);
 
         deleteProjectButton.addEventListener('click', deleteProject);
@@ -167,7 +189,7 @@ function renderProjects() {
     // creates divs
     projectsDivMaker();
 
-    appendProjectButton();
+    appendProjectForm();
 }
 
 return { project, projectList, currentProject, idMaker, activeProject, deleteProject, renderProjects, setCurrentProject, idMaker };

@@ -74,7 +74,7 @@ h1, h2 {
     overflow-y: scroll;
 }
 
-.projectItem, .todoItem {
+.projectItem {
     width: 80%;
     min-height: 60px;
 
@@ -90,6 +90,98 @@ h1, h2 {
     align-items: center;
     padding: 10px;
     margin: 10px 0px;
+}
+
+.todoItem {
+    width: 90%;
+    min-height: 60px;
+
+    background-color: var(--light2);
+
+    border: solid 3px var(--dark1);
+
+    color: var(--dark1);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 10px 0px;
+}
+
+#highPriorityText {
+    color: var(--dark1);
+    font-weight: 800;
+}
+
+.highPriorityItem {
+    background-color: rgb(216, 84, 84);
+}
+
+.todoContent {
+    width: 100%;
+}
+
+label {
+    display: inline-block;
+    width: 300px;
+    margin: 5px 0px;
+    float: left;
+    font-size: 18px;
+}
+
+input {
+    width: 100%;
+}
+
+.todoTitle, #titleInput {
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 800;
+}
+
+#titleInput, #descriptionInput, #dueDateInput {
+    background-color: var(--light2);
+}
+
+#highPriorityLabel {
+    display: flex;
+    gap: 10px;
+}
+
+#highPriorityInput {
+    width: 24px;
+    height: 24px;
+    padding-left: 15px;
+    background-color: var(--light2);
+}
+
+#titleLabel, #descriptionLabel, #dueDateLabel, #highPriorityLabel {
+    width: 100%;
+    padding-bottom: 12px;
+}
+
+.todoDescription {
+    font-size: 14px;
+}
+
+.todoDueDate, #dueDateInput {
+    font-size: 18px;
+}
+
+.todoDueDate {
+    padding-bottom: 15px;
+}
+
+#submitTodoForm {
+    width: 100%;
+    height: 50px;
+    background-color: var(--light1);
+    border: solid 3px var(--dark1);
+    font-size: 24px;
+    color: var(--dark1);
+    font-weight: 800;
 }
 
 .clickable {
@@ -117,9 +209,9 @@ h1, h2 {
     align-items: center;
 }
 
-#addProjectButton, .deleteProjectButton {
-    height: 100%;
-    width: 10%;
+.addButton, .deleteButton {
+    height: 30px;
+    width: 30px;
     font-size: 24px;
 
     margin-left: auto;
@@ -131,10 +223,17 @@ h1, h2 {
     font-family: sans-serif;
 
     border: solid 3px var(--dark1);
-    background-color: var(--med2);
-    color: var(--light2);
+    color: var(--dark1);
 
     cursor: pointer;
+}
+
+.addButton {
+    background-color: green;
+}
+
+.deleteButton {
+    background-color: red;
 }
 
 #addProjectButton:active, .deleteProjectButton:active {
