@@ -1,17 +1,23 @@
+import { todoFactory } from './todoManager.js';
+
 function projectFactory() {
+
+// console.log(projectList[0].todos);
+
 // project manager code
 
 // project related variables
 const projectList = [];
 let currentProject;
 
-function project(title) {
+function project(title, todoManager) {
     this.title = title;
+    this.todoManager = new todoFactory();
 }
 
 // makes a javascript valid id based on project title
 function idMaker(string) {
-    let newTitle = string + "id";
+    let newTitle = string + "projectid";
     let titleFixer = newTitle.replace(/ /g, "");
     newTitle = titleFixer.toLowerCase();
     return newTitle;
@@ -19,18 +25,18 @@ function idMaker(string) {
 
 function checkCurrentProject() {
     if(currentProject) {
-        const thisProject = document.getElementById(currentProject);
-        thisProject.classList.remove('activeProject');
+        const thisProjectElement = document.getElementById(currentProject);
+        thisProjectElement.classList.remove('activeProject');
     }
 }
 
 function setCurrentProject(current) {
     currentProject = current;
-    console.log(typeof(currentProject));
-    const thisProject = document.getElementById(currentProject);
-    console.log(thisProject);
-    thisProject.classList.add('activeProject');
-    activeHeader.innerText = `${thisProject.firstChild.data} to-do:`;
+    console.log(currentProject);
+    const thisProjectElement = document.getElementById(currentProject);
+    console.log(thisProjectElement);
+    thisProjectElement.classList.add('activeProject');
+    activeHeader.innerText = `${thisProjectElement.firstChild.data} to-do:`;
 }
 
 // handle active projects
@@ -45,7 +51,7 @@ function checkDuplicate(input) {
 
     let duplicateChecker = input;
     let duplicateCheckerReplaced = duplicateChecker.replace(/ /g, "");
-    duplicateChecker = duplicateCheckerReplaced + "id";
+    duplicateChecker = duplicateCheckerReplaced + "projectid";
 
     for(var i = 0; i < projectList.length; i++) {
         if(projectList[i].id == duplicateChecker) {
@@ -166,7 +172,7 @@ function renderProjects() {
 
 }
 
-return { project, projectList, currentProject, idMaker, activeProject, deleteProject, renderProjects };
+return { project, projectList, currentProject, idMaker, activeProject, deleteProject, renderProjects, setCurrentProject, idMaker };
 }
 
 // exports to index.js

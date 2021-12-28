@@ -1,0 +1,12 @@
+function todoFactory() {
+
+    function todoItem(title, description, dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
+
+    return { todoItem };
+}
+
+export { todoFactory };
