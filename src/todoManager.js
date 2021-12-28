@@ -118,27 +118,47 @@ function todoFactory() {
 
     }
 
+    function idMaker(string) {
+        let randomNumber = (Math.floor(Math.random()*3000));
+        console.log(randomNumber);
+        let newId = string + "todoid" + randomNumber;
+        let idFixer = newId.replace(/ /g, "");
+        newId = idFixer.toLowerCase();
+        return newId;
+    }
+
+    // function checkPriority() {
+        
+    // }
+
+    function addTodoItem() {
+        // create a new todo in current project
+
+    }
+
     function renderTodos() {    
+    // do not render todos if there is no current project
+    if(!currentProject == null) {
+        console.log("no current project");
+    }
     const thisProjectElement = document.getElementById(currentProject);
     todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;
     //find the index of the current project and render the todos under that index
     const index = projectList.findIndex(i => i.id == `${currentProject}`);
-    // console.log(index);
 
         for(var i = 0; i<projectList[index].todoManager.todoList.length; i++) {
             const todoItem = document.createElement('div');
             todoItem.classList.add('todoItem');
+            todoItem.id = idMaker(projectList[index].todoManager.todoList[i].title)
+
+            //check for high priority item and update class and stying
             if(projectList[index].todoManager.todoList[i].isHighPriority == true) {
-                console.log(`${projectList[index].todoManager.todoList[i].title} priority is high`);
                 todoItem.classList.add('highPriorityItem');
                 const highPriorityText = document.createElement('div');
                 highPriorityText.id = 'highPriorityText';
                 highPriorityText.textContent = "Priority: High";
                 todoItem.appendChild(highPriorityText);
-                
-            } else {
-                console.log(`${projectList[index].todoManager.todoList[i].title} priority is low`);
-            }
+            } 
 
             // todo title
             const todoTitle = document.createElement('div');

@@ -11,14 +11,14 @@ function project(title, todoManager) {
 
 // makes a javascript valid id based on project title
 function idMaker(string) {
-    let newTitle = string + "projectid";
-    let titleFixer = newTitle.replace(/ /g, "");
-    newTitle = titleFixer.toLowerCase();
-    return newTitle;
+    let newId = string + "projectid";
+    let idFixer = newId.replace(/ /g, "");
+    newId = idFixer.toLowerCase();
+    return newId;
 }
 
 function checkCurrentProject() {
-    if(currentProject) {
+    if(currentProject != null) {
         const thisProjectElement = document.getElementById(currentProject);
         thisProjectElement.classList.remove('activeProject');
     }
@@ -120,7 +120,6 @@ function deleteProject(e) {
         e.stopPropagation();
         return;
     }
-    console.log("still going");
 
     // returns the ID as a string
     const targetId = e.target.parentNode.id;
@@ -149,7 +148,15 @@ function deleteProject(e) {
     e.stopPropagation();
     renderProjects();
 
-    setCurrentProject(currentProject);
+    if(projectList.length ==0) {
+        todos.removeChild(todos.childNodes[1]);
+        activeHeader.innerText = "No project selected";
+    } 
+
+    if(targetId == currentProject) {
+        currentProject = null;
+    }
+
 
 }
 
