@@ -1,5 +1,6 @@
 import { currentProject } from './globals.js';
 import { projectList } from './globals.js';
+import { format, parseISO } from 'date-fns';
 
 function todoFactory() {
 
@@ -259,7 +260,8 @@ function todoFactory() {
             if(todoList[i].dueDate) {
             const todoDueDate = document.createElement('div');
             todoDueDate.classList.add('todoContent', 'todoDueDate');
-            todoDueDate.innerText = "due " + todoList[i].dueDate;
+            const formattedDate = format(parseISO(`${todoList[i].dueDate}`), 'PPP');
+            todoDueDate.innerText = "due " + formattedDate;
             todoItem.appendChild(todoDueDate);
             }
 
