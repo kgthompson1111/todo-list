@@ -1,4 +1,8 @@
 let currentProject;
 const projectList = [];
 
-export { currentProject, projectList };
+function populateStorage() {
+    localStorage.setItem("data", JSON.stringify(projectList));
+}
+
+export { currentProject, projectList, populateStorage };

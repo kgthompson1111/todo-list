@@ -1,5 +1,5 @@
 import { todoFactory } from './todoManager.js';
-import { currentProject, projectList } from './globals.js';
+import { currentProject, projectList, populateStorage } from './globals.js';
 
 function projectFactory() {
 
@@ -78,6 +78,8 @@ function addProject() {
         newProject.id = `${newProjectId}`;
         projectList.push(newProject);
 
+        populateStorage();
+
         renderProjects();
 
         checkCurrentProject();
@@ -142,6 +144,7 @@ function deleteProject(e) {
 
     // delete from projects array
     projectList.splice(index, 1);
+    populateStorage();
 
     // delete dom element
     e.target.parentNode.parentNode.removeChild(targetItem);
@@ -183,6 +186,10 @@ function projectsDivMaker() {
 }
 
 function renderProjects() {
+
+    let retrieveData = JSON.parse(localStorage.getItem("data"));
+    console.log(retrieveData);
+    projectList = retrieveData.slice();
 
     for(var i = 0; i<projectList.length; i++) {
         projectList[i].id = idMaker(projectList[i].title);

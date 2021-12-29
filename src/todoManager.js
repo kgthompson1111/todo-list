@@ -1,5 +1,4 @@
-import { currentProject } from './globals.js';
-import { projectList } from './globals.js';
+import { currentProject, projectList  } from './globals.js';
 import { format, parseISO } from 'date-fns';
 
 function todoFactory() {
@@ -76,7 +75,6 @@ function todoFactory() {
     }
 
     function hideTodoForm() {
-        console.log(newTodoCard);
         newTodoCard.removeChild(titleLabel);
         newTodoCard.removeChild(dueDateLabel);
         newTodoCard.removeChild(descriptionLabel);
@@ -139,7 +137,6 @@ function todoFactory() {
         // update isDone property
 
         todoList[index].isDone = true;
-        console.log(todoList[index]);
 
         const targetElement = document.getElementById(targetId);
         targetElement.style.backgroundColor = "#2E294E"
@@ -176,9 +173,6 @@ function todoFactory() {
             alert("Task is a required field");
             return;
         }
-        
-
-        console.log(dueDateInput.value);
 
         // add new todo item with content in the form
         const newTodoItem = new todoItem(
