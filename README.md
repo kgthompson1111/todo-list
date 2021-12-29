@@ -1,10 +1,10 @@
 # todo-list
 TOP todo list project
+Note: does not work with localStorage
 
 Features to fix in the future:
 
 Remove special characters from the idMaker function using regular expressions
 
-Sort arrays based on date
+Add localStorage (if possible)
 
-Modularize add priority function

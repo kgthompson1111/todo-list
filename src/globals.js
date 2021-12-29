@@ -1,8 +1,15 @@
+import { todoFactory } from './todoManager.js';
+import { projectFactory } from './projectManager.js';
+
 let currentProject;
 const projectList = [];
 
-function populateStorage() {
-    localStorage.setItem("data", JSON.stringify(projectList));
-}
+// function writeData() {
+//     localStorage.setItem("projectData", JSON.stringify(projectList) || []);
+// }
 
-export { currentProject, projectList, populateStorage };
+// function readData() {
+//     let readArray = JSON.parse(localStorage.getItem("projectData"));
+// }
+
+export { currentProject, projectList };

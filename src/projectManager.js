@@ -1,8 +1,7 @@
 import { todoFactory } from './todoManager.js';
-import { currentProject, projectList, populateStorage } from './globals.js';
+import { currentProject, projectList } from './globals.js';
 
 function projectFactory() {
-
 
 function project(title, todoManager) {
     this.title = title;
@@ -11,9 +10,10 @@ function project(title, todoManager) {
 
 // makes a javascript valid id based on project title
 function idMaker(string) {
-    let newId = string + "projectid";
-    let idFixer = newId.replace(/ /g, "");
-    newId = idFixer.toLowerCase();
+    let newId = string;
+    let idSpaceFixer = newId.replace(/ /g, "");
+    let idCharFixer = idSpaceFixer.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+    newId = idCharFixer.toLowerCase() + "projectid";
     return newId;
 }
 
@@ -78,8 +78,6 @@ function addProject() {
         newProject.id = `${newProjectId}`;
         projectList.push(newProject);
 
-        populateStorage();
-
         renderProjects();
 
         checkCurrentProject();
@@ -88,6 +86,7 @@ function addProject() {
 
         const index = projectList.findIndex(i => i.id == `${currentProject}`);
         projectList[index].todoManager.renderTodos();
+
     }
 
 }
@@ -140,11 +139,15 @@ function deleteProject(e) {
         const thisProjectElement = document.getElementById(currentProject);
         todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;
         projectList[index].todoManager.appendTodoForm();
+        if(projectList[0] == null) {
+            console.log("there's nothing here")
+        }
+
+        activeHeader.innerText = "No project selected";
     }
 
     // delete from projects array
     projectList.splice(index, 1);
-    populateStorage();
 
     // delete dom element
     e.target.parentNode.parentNode.removeChild(targetItem);
@@ -186,10 +189,6 @@ function projectsDivMaker() {
 }
 
 function renderProjects() {
-
-    let retrieveData = JSON.parse(localStorage.getItem("data"));
-    console.log(retrieveData);
-    projectList = retrieveData.slice();
 
     for(var i = 0; i<projectList.length; i++) {
         projectList[i].id = idMaker(projectList[i].title);

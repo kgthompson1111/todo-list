@@ -119,12 +119,22 @@ function todoFactory() {
     }
 
     function idMaker(string) {
+        let newId = string;
+        let idSpaceFixer = newId.replace(/ /g, "");
+        let idCharFixer = idSpaceFixer.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
         let randomNumber = (Math.floor(Math.random()*3000));
-        let newId = string + "todoid" + randomNumber;
-        let idFixer = newId.replace(/ /g, "");
-        newId = idFixer.toLowerCase();
+        newId = idCharFixer.toLowerCase() + "todoid" + randomNumber;
         return newId;
     }
+
+    function idMaker(string) {
+        let newId = string + "projectid";
+        let idSpaceFixer = newId.replace(/ /g, "");
+        let idCharFixer = idSpaceFixer.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+        newId = idCharFixer.toLowerCase();
+        return newId;
+    }
+
 
     // function checkPriority() {
         
