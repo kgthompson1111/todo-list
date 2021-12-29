@@ -10,7 +10,7 @@ function todoFactory() {
         this.dueDate = dueDate;
         this.description = description;
         this.isHighPriority = isHighPriority;
-        isDone = false;
+        this.isDone = isDone;
     }
 
     function showTodoForm() {
@@ -131,6 +131,41 @@ function todoFactory() {
         
     // }
 
+    function markDone(targetId) {
+
+        const index = todoList.findIndex(i => i.id == `${targetId}`);
+
+        // update isDone property
+
+        todoList[index].isDone = true;
+        console.log(todoList[index]);
+
+        const targetElement = document.getElementById(targetId);
+        targetElement.style.backgroundColor = "#2E294E"
+
+        if(todoList[index].isHighPriority) {
+        let markDonePriority = targetElement.querySelector('.todoPriority');
+        markDonePriority.style.display = "none";
+        }
+
+        const markDoneTitle = targetElement.querySelector('.todoTitle');
+        markDoneTitle.style.textDecoration = "line-through";
+        markDoneTitle.style.color = "white";
+
+        if(todoList[index].dueDate != "") {
+        const markDoneDueDate = targetElement.querySelector('.todoDueDate');
+        markDoneDueDate.style.display = "none";
+        }
+
+        if(todoList[index].description != "") {
+        const markDoneDescription = targetElement.querySelector('.todoDescription');
+        markDoneDescription.style.display = "none";
+        }
+
+        const removedMarkDoneButton = targetElement.querySelector('.markDoneButton');
+        removedMarkDoneButton.style.display = "none";
+    }
+
     function addTodoItem() {
         // create a new todo in current project
         const index = projectList.findIndex(i => i.id == `${currentProject}`);
@@ -164,7 +199,7 @@ function todoFactory() {
     }
 
     function deleteTodoItem(e) {
-        // double check to delete entire project
+        // double check to delete
         if(window.confirm("Are you sure you want to delete this item?")) {
             null;
         } else {
@@ -209,7 +244,7 @@ function todoFactory() {
             if(projectList[index].todoManager.todoList[i].isHighPriority == true) {
                 todoItem.classList.add('highPriorityItem');
                 const highPriorityText = document.createElement('div');
-                highPriorityText.id = 'highPriorityText';
+                highPriorityText.classList.add('todoPriority');
                 highPriorityText.textContent = "Priority: High";
                 todoItem.appendChild(highPriorityText);
             } 
@@ -240,8 +275,20 @@ function todoFactory() {
             deleteTodoButton.addEventListener('click', deleteTodoItem);
             todoItem.appendChild(deleteTodoButton);
 
+            const markDoneButton = document.createElement('div');
+            markDoneButton.innerHTML = "&#10004;";
+            markDoneButton.classList.add('markDoneButton');
+            markDoneButton.addEventListener('click', (e) => markDone(e.target.parentNode.id));
+            todoItem.appendChild(markDoneButton);
+
             todos.appendChild(todoItem);
+
+            if(todoList[i].isDone) {
+                markDone(todoList[i].id);
+            }
         }
+
+
 
         appendTodoForm();
     }

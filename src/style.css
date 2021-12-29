@@ -211,12 +211,10 @@ input {
     overflow-y: scroll;
 }
 
-.addButton, .deleteButton {
+.addButton, .deleteButton, .markDoneButton {
     height: 30px;
     width: 30px;
     font-size: 24px;
-
-    margin-left: auto;
 
     display: flex;
     justify-content: center;
@@ -230,8 +228,16 @@ input {
     cursor: pointer;
 }
 
-.addButton {
+.addButton, .deleteButton {
+    margin-left: auto;
+}
+
+.addButton, .markDoneButton {
     background-color: green;
+}
+
+.markDoneButton {
+    margin-left: 5px;
 }
 
 .deleteButton {
