@@ -1,5 +1,5 @@
 import { todoFactory } from './todoManager.js';
-import { currentProject, projectList, writeData, readData } from './globals.js';
+import { currentProject, projectList, writeData } from './globals.js';
 
 function projectFactory() {
 
@@ -164,6 +164,8 @@ function deleteProject(e) {
     if(targetId == currentProject) {
         currentProject = null;
     }
+
+    writeData();
 }
 
 function projectsDivMaker() {
@@ -192,11 +194,11 @@ function projectsDivMaker() {
 
 function renderProjects() {
 
-    readData();
-    
     for(var i = 0; i<projectList.length; i++) {
         projectList[i].id = idMaker(projectList[i].title);
     }
+
+    checkCurrentProject();
 
     // clear project list to prevent display bugs
     projects.innerHTML = "<h2>Projects</h2>"
@@ -205,6 +207,7 @@ function renderProjects() {
     projectsDivMaker();
 
     appendProjectForm();
+
 }
 
 return { project, projectList, currentProject, idMaker, activeProject, deleteProject, renderProjects, setCurrentProject, idMaker };

@@ -1,5 +1,6 @@
 import { currentProject, projectList  } from './globals.js';
 import { format, parseISO } from 'date-fns';
+import { readData, writeData } from './globals.js';
 
 function todoFactory() {
 
@@ -197,7 +198,9 @@ function todoFactory() {
         );
         
         // check for high priority and add high priority calss
-        
+
+        writeData();
+
         projectList[index].todoManager.todoList.push(newTodoItem);
         projectList[index].todoManager.renderTodos();
 
@@ -225,6 +228,7 @@ function todoFactory() {
     
         // // delete dom element
         e.target.parentNode.parentNode.removeChild(targetItem);
+        writeData();
         renderTodos();
     }
 
@@ -233,6 +237,7 @@ function todoFactory() {
     if(!currentProject == null) {
         return;
     }
+
     const thisProjectElement = document.getElementById(currentProject);
     todos.innerHTML = `<h2 id="activeHeader">${thisProjectElement.firstChild.data} to-dos:`;
     //find the index of the current project and render the todos under that index
