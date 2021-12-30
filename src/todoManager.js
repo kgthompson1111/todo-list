@@ -129,10 +129,11 @@ function todoFactory() {
     }
 
     function idMaker(string) {
-        let newId = string + "projectid";
+        let newId = string + "todoid";
         let idSpaceFixer = newId.replace(/ /g, "");
         let idCharFixer = idSpaceFixer.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-        newId = idCharFixer.toLowerCase();
+        let randomNumber = Math.floor(Math.random() * 3000);
+        newId = idCharFixer.toLowerCase() + randomNumber;
         return newId;
     }
 
@@ -192,13 +193,13 @@ function todoFactory() {
         //high priority
         highPriorityInput.checked ? true : false
         );
-        
-        // check for high priority and add high priority calss
 
-        writeData();
+        // check for high priority and add high priority calss
 
         projectList[index].todoManager.todoList.push(newTodoItem);
         projectList[index].todoManager.renderTodos();
+
+        writeData();
 
     }
 
@@ -245,6 +246,7 @@ function todoFactory() {
             todoItem.classList.add('todoItem');
             todoItem.id = newTodoId;
             todoList[i].id = newTodoId;
+            console.log(todoItem.id);
 
             //check for high priority item and update class and styling
             if(projectList[index].todoManager.todoList[i].isHighPriority == true) {

@@ -9,8 +9,8 @@ const projectManager = new projectFactory();
 // initiate todoFactory called todoManager
 const todoManager = new todoFactory();
 
-if(!localStorage) {
 // populate project list and set current project
+if(localStorage.getItem("projectData") === null) {
 projectManager.projectList[0] = new projectManager.project('Life');
 projectManager.projectList[0].id = projectManager.idMaker(projectManager.projectList[0].title)
 
