@@ -197,9 +197,8 @@ function todoFactory() {
         // check for high priority and add high priority calss
 
         projectList[index].todoManager.todoList.push(newTodoItem);
-        projectList[index].todoManager.renderTodos();
-
         writeData();
+        projectList[index].todoManager.renderTodos();
 
     }
 
