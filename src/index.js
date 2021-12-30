@@ -9,6 +9,7 @@ const projectManager = new projectFactory();
 // initiate todoFactory called todoManager
 const todoManager = new todoFactory();
 
+if(!localStorage) {
 // populate project list and set current project
 projectManager.projectList[0] = new projectManager.project('Life');
 projectManager.projectList[0].id = projectManager.idMaker(projectManager.projectList[0].title)
@@ -19,6 +20,8 @@ projectManager.projectList[0].todoManager.todoList[1] = new todoManager.todoItem
 projectManager.projectList[0].todoManager.todoList[2] = new todoManager.todoItem('Take out garbage', '', '', false, true);
 
 writeData();
+
+}
 
 readData();
 

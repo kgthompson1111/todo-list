@@ -1,10 +1,10 @@
 import { currentProject, projectList  } from './globals.js';
 import { format, parseISO } from 'date-fns';
-import { readData, writeData } from './globals.js';
+import { writeData } from './globals.js';
 
 function todoFactory() {
 
-    const todoList = [];
+    let todoList = [];
 
     function todoItem(title, description, dueDate, isHighPriority, isDone) {
         this.title = title;
@@ -137,10 +137,6 @@ function todoFactory() {
     }
 
 
-    // function checkPriority() {
-        
-    // }
-
     function markDone(targetId) {
 
         const index = todoList.findIndex(i => i.id == `${targetId}`);
@@ -234,8 +230,8 @@ function todoFactory() {
 
     function renderTodos() {    
     // do not render todos if there is no current project
-    if(!currentProject == null) {
-        return;
+    if(currentProject == null) {
+        // return;
     }
 
     const thisProjectElement = document.getElementById(currentProject);
@@ -305,7 +301,7 @@ function todoFactory() {
         }
     }
 
-    return { todoList, todoItem, renderTodos, appendTodoForm };
+    return { todoList, todoItem, renderTodos, appendTodoForm, todoList };
 }
 
 export { todoFactory };
