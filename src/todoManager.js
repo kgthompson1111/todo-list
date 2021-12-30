@@ -295,8 +295,9 @@ function todoFactory() {
         }
 
 
-
+        if(currentProject) {
         appendTodoForm();
+        }
     }
 
     return { todoList, todoItem, renderTodos, appendTodoForm };

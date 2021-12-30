@@ -1,5 +1,5 @@
 import { todoFactory } from './todoManager.js';
-import { currentProject, projectList } from './globals.js';
+import { currentProject, projectList, writeData, readData } from './globals.js';
 
 function projectFactory() {
 
@@ -86,6 +86,8 @@ function addProject() {
 
         const index = projectList.findIndex(i => i.id == `${currentProject}`);
         projectList[index].todoManager.renderTodos();
+
+        writeData();
 
     }
 
@@ -190,6 +192,8 @@ function projectsDivMaker() {
 
 function renderProjects() {
 
+    readData();
+    
     for(var i = 0; i<projectList.length; i++) {
         projectList[i].id = idMaker(projectList[i].title);
     }
